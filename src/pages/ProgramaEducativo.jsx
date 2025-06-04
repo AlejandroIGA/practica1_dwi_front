@@ -1,3 +1,5 @@
+import ProgramaEducativoListar from "../components/ProgramaEducativoListar";
+
 export function ProgramaEducativo() {
   return (
     <div>
@@ -59,41 +61,8 @@ export function ProgramaEducativo() {
       
       <div>
         <h2>Programas registrados</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Clave</th>
-              <th>Programa Educativo</th>
-              <th>División</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td>IDGS</td>
-              <td>Ingeniería en Desarrolllo y Gestión de Software</td>
-              <td>División de tecnologias de automatización e información</td>
-              <td>Activo</td>
-              <td>
-                <button>Editar</button>
-                <button>Eliminar</button>
-              </td>
-            </tr>
-            
-            <tr>
-              <td>IRIC</td>
-              <td>Ingenieria en redes inteligentes y ciberseguridad</td>
-              <td>División de tecnologias de automatización e información</td>
-              <td>Activo</td>
-              <td>
-                <button>Editar</button>
-                <button>Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <ProgramaEducativoListar />
+
       </div>
     </div>
   );
