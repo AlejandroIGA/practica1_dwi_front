@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from 'react';
-
+import axios from 'axios';
 const ProgramaEducativoListar = () => {
   const [programas, setProgramas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
 
-  const API_URL = 'https://localhost:8080/api/pe';
+  const API_URL = 'http://localhost:8080/api/pe';
 
-  useEffect(() => {
-    fetch(API_URL)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Error al cargar los datos');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setProgramas(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
+
+ useEffect(() => {
+  const soloActivos = true;
+  const fetchProgramas = async () => {
+    try {
+      const response = await axios.get(API_URL, {
+        params: { soloActivos },
       });
-  }, []);
+      setProgramas(response.data);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error al cargar los datos');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchProgramas();
+}, []); 
 
   if (loading) return <p>Cargando programas educativos...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -46,8 +47,8 @@ const ProgramaEducativoListar = () => {
             <tr key={programa.clave}>
               <td>{programa.clave}</td>
               <td>{programa.programaEducativo}</td>
-              <td>{programa.division}</td>
-              <td>{programa.estado}</td>
+              <td>{programa.division.clave}</td>
+              <td>{programa.estado ? "ola No ta activo" : "TA ACTIVO PA"  }</td>
             </tr>
           ))}
         </tbody>
