@@ -115,7 +115,7 @@ export function ProgramaEducativo() {
       {error && <div className="alert alert-danger">{error}</div>}
 
       <div className="section">
-        <h2>Registro de programas</h2>
+        <h2>Registro de Programas</h2>
         <form onSubmit={handleSubmit}>
           <input type="hidden" name="id" value={formData.id} onChange={handleFormChange} />
 
