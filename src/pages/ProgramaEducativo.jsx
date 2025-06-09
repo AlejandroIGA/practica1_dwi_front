@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { obtenerProgramaEducativo, editarProgramaEducativo } from "../services/ServiceProgramaEducativo";
 import { obtenerDivisiones } from "../services/ServiceDivision";
+import { crearProgramaEducativo } from "../services/ServiceProgramaEducativo";
+
 
 export function ProgramaEducativo() {
   const [error, setError] = useState('');
@@ -82,7 +84,13 @@ export function ProgramaEducativo() {
       });
       alert("Programa educativo actualizado correctamente");
     } else {
-      alert("Crear nuevo programa");
+      await crearProgramaEducativo({
+        clave: formData.clave,
+        programa_educativo: formData.programa_educativo,
+        activo: formData.activo,
+        id_division: formData.id_division
+      });
+      alert("Programa educativo creado correctamente");
     }
     
     await cargarProgramas();
@@ -107,7 +115,7 @@ export function ProgramaEducativo() {
       {error && <div className="alert alert-danger">{error}</div>}
 
       <div className="section">
-        <h2>Registro de programas</h2>
+        <h2>Registro de Programas</h2>
         <form onSubmit={handleSubmit}>
           <input type="hidden" name="id" value={formData.id} onChange={handleFormChange} />
 
